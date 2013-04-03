@@ -1,16 +1,16 @@
 package com.example.artbook;
 
-import java.io.File;
 import java.io.InputStream;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.DisplayMetrics;
@@ -67,6 +67,7 @@ public class BookRootLayout extends FrameLayout implements CurlView.PageProvider
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.getSettings().setJavaScriptEnabled(true);
 
+		
         webView.setWebChromeClient(new WebChromeClient() {
             public boolean onConsoleMessage(ConsoleMessage message) {
                 Log.d("artbook", message.message() + " -- From line "
@@ -80,9 +81,9 @@ public class BookRootLayout extends FrameLayout implements CurlView.PageProvider
         loadDialog.setMessage("加载网页..");
         loadDialog.setCancelable(false);
         loadDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        //loadDialog.show();
+        loadDialog.show();
         final Display display = ((Activity)this.getContext()).getWindowManager().getDefaultDisplay();
-        final int height = ArtBookUtils.px2dip(this.getContext(),Float.valueOf(display.getHeight()-84));
+        final int height = ArtBookUtils.px2dip(this.getContext(),Float.valueOf(display.getHeight()-(84+90)));
         final int width = ArtBookUtils.px2dip(this.getContext(),Float.valueOf(display.getWidth()));
         webView.setWebViewClient(new WebViewClient() {
             @Override

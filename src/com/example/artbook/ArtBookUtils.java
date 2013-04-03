@@ -26,22 +26,6 @@ import android.view.View;
  * To change this template use File | Settings | File Templates.
  */
 public class ArtBookUtils {
-    public static Bitmap loadBitmapFromView(View v, int width, int height) {
-        v.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-        long time=System.currentTimeMillis();
-        Bitmap b = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(b);
-
-        v.measure(
-                View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
-                View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY));
-        v.layout(0, 0, width, height);
-        v.draw(c);
-
-        Log.d("artbook","load bitmap time: "+(System.currentTimeMillis()-time));
-        return b;
-    }
     
     /**
 	 * 获得本地图片
@@ -83,6 +67,9 @@ public class ArtBookUtils {
 		}
 	}
 	
+	
+	
+	
 
 	public static InputStream  changeWidthAndHeight(Context contex,String cssfile,int width,int height){
 		try {
@@ -100,8 +87,9 @@ public class ArtBookUtils {
 				String str = new String(outStream.toByteArray());
 				Log.v("ArtBook", str);
 				String str1 = str.replaceAll("temp_height", height+"px");
+				String str2 = str1.replaceAll("temp_image_width", width-80+"px");
 				Log.v("ArtBook", "str:"+str1);
-				strCss = str1.replaceAll("temp_width", width+"px");
+				strCss = str2.replaceAll("temp_width", width+"px");
 				Log.v("ArtBook", "str:"+strCss);
 			}
 			return new ByteArrayInputStream(strCss.getBytes());
@@ -128,6 +116,23 @@ public class ArtBookUtils {
 		final float scale = context.getResources().getDisplayMetrics().density;
 		return (int) (pxValue / scale + 0.5f);
 	}
+    public static Bitmap loadBitmapFromView(View v, int width, int height) {
+        v.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        long time=System.currentTimeMillis();
+        Bitmap b = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(b);
+
+        v.measure(
+                View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY));
+        v.layout(0, 0, width, height);
+        v.draw(c);
+
+        Log.d("artbook","load bitmap time: "+(System.currentTimeMillis()-time));
+        return b;
+    }
+
     public static void saveBitmap(Bitmap bitmap, String fileName) {
         long time=System.currentTimeMillis();
         String filePath = Environment.getExternalStorageDirectory() + "/" + fileName;

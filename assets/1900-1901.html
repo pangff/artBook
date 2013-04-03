@@ -6,10 +6,10 @@
     <script src="jquery-1.9.1.min.js"></script>
     <link href="file:///mnt/shell/emulated/0/book.css" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body onload="initView();" style="background-image: url('images/background_bg.jpg') ">
 <section id="doc">
-  <header>概述</header>
   <article>
+  <header>概述</header>
     <p> 19世纪末叶，中国画家越来越多地看到西方绘画，其绘画风格开始朝着“逼真”与“实写”的方向转化。这个时期，西方列强对中国的入侵不仅仅是政治和经济方面，同时也影响到艺术和文化领域。具体地说，在枪炮的攻击以及西方科学的影响下，一个看起来基本稳定的大清国迅速发生了变化。这个变化不仅仅是一般的人员流动或是贸易往来的频繁，而是在日常生活的各个方面，正是这种细微的渐变影响着人们，也改变着用毛笔或者其他材料绘图写字的艺术家们。中国画家有太长的岁月接触陈腐，只要有“新”就会本能地去接纳。不过，在清末画坛上，中国传统艺术和西方的写实艺术此起彼伏：在中国传统文人的山水、梅兰竹菊这类题材和主题范围的固守与西方油画写实和透视技法的引进同时存在，使得当时的中国艺术处在渐变的状态中。 </p>
     <header>政治背景</header>
     <p> 7月，英、美、德、法、俄，日、意、奥八国联军以“镇压义和团”为名组成联军武装入侵中国，清政府向八国宣战。八国联军很快攻陷天津，8月14日联军攻入北京。古老的中华帝国丧失了最后一点“颜面”。10月11日，李鸿章（1823—1901）抵京，开始与八国联军谈判。12月27日，驻华公使团向清政府提交《议和大纲》，全权议和大臣奕劻（1836—1918，一说为1838—1917）、李鸿章在得到慈禧（慈禧太后、西太后、叶赫那拉氏，1835—1908）谕令后同意了所有十二条大纲。 </p>
@@ -131,26 +131,17 @@
   </article>
 </section>
 <script>
-
-	function initView(height){
-		 var width = document.body.clientWidth;
-		 var height = $(document).height();
-		 $("#doc").height(height+"px");
-		 $("#doc").css("-webkit-column-width",width+"px");
-		 $("article img").css("max-width",width+"px");
-		 console.log('>>>>>window height<<<<<<:' + height);
-	}
-	
-    $(document).ready(function () {
+	function initView(){
         console.log('>>>>>window width:' + document.body.clientWidth + ", height: " + document.body.clientHeight + ", doc width: " + $(document).width());
-//        console.log('document width>>>>'+$(document).width()+", height>>>"+$(document).height());
+//      console.log('document width>>>>'+$(document).width()+", height>>>"+$(document).height());
 		 var totalWidth =  $(document).width();
 		 var pageWidth = document.body.clientWidth;
 		 
 		 
 		 window.artbook.getPageCount(totalWidth,pageWidth);
 		 console.log('*******PageCount'+totalWidth/pageWidth);
-    });
+	}
+
 </script>
 </body>
 </html>
